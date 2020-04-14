@@ -11,15 +11,6 @@ Package `MediaComp`
    sounds.rst
    turtles.rst
 
-      
-
-
-
-
-
-
-
-
 Indices and tables
 ==================
 

@@ -3,7 +3,6 @@
 
 :py:mod:`~colors` Module
 ========================
-.. automodule:: MediaComp.colors
 
 :py:class:`~Color` class
 ----------------------------------

@@ -3,7 +3,6 @@
 
 :py:mod:`~sounds` Module
 ========================
-.. automodule:: MediaComp.sounds
 
 :py:class:`~Sound` class
 -------------------------

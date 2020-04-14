@@ -3,7 +3,6 @@
 
 :py:mod:`~pictures` Module
 ==========================
-.. automodule:: MediaComp.pictures
 
 :py:class:`~Picture` class
 --------------------------
