@@ -32,19 +32,21 @@ print(sys.path)
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
+    'sphinx.ext.autosummary'
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
+#    'sphinx.ext.coverage',
+#    'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinx.ext.napoleon',]
+    'sphinx.ext.napoleon',
+    ]
 
 autodoc_default_options = {
     'exclude-members': '__weakref__',
     'inherited-members': True,
-    'show-inheritance': True,
+    'show-inheritance': False,
     'ignore-module-all': True,
     'imported-members': True,
 }
@@ -139,5 +141,5 @@ htmlhelp_basename = 'MediaCompdoc'
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'python': ('https://docs.python.org/3.7', None),
                        'PIL': ('https://pillow.readthedocs.io/en/stable/', None),
-                       'numpy': ('https://numpy.org/doc/1.18/', None),
-                       'scipy': ('https://docs.scipy.org/doc/scipy-1.4.1/', None)}
+                       'numpy': ('http://docs.scipy.org/doc/numpy/', None),
+                       'scipy': ('http://docs.scipy.org/doc/scipy/reference', None)}

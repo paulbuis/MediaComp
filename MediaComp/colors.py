@@ -8,7 +8,9 @@
 # licensed under the Creative Commons Attribution 3.0 United States License,
 # See: http://creativecommons.org/licenses/by/3.0/us/).
 #
-
+"""
+Provide module level docstring
+"""
 # module abc is standard in Python 3: https://docs.python.org/3/library/abc.html
 # used to create abstract base classes
 import abc
@@ -23,7 +25,8 @@ import math
 # PEP 525 -- Syntax for Variable Annotations: https://www.python.org/dev/peps/pep-0526/
 # use mypy for static type checking of Pyhton code: http://mypy-lang.org/
 # note that just because a parameter is annotated to be of a specific type, doesn't mean
-# that at runtime it will actually be of that type: dynamic checking or casting/conversion still needs to be done
+# that at runtime it will actually be of that type: dynamic checking or casting/conversion
+#  still needs to be done
 import typing
 
 # module colorsys is standard in Python: https://docs.python.org/3.7/library/colorsys.html
@@ -35,7 +38,7 @@ import colorsys
 RGB = typing.Tuple[int, int, int]
 RGBA = typing.Tuple[int, int, int, int]
 RGBZ = typing.Tuple[int, int, int, int]
-RGB_float = typing.Tuple[float, float, float]
+RGBfloat = typing.Tuple[float, float, float]
 HLS = typing.Tuple[float, float, float]
 HSV = typing.Tuple[float, float, float]
 
@@ -51,14 +54,17 @@ HSV = typing.Tuple[float, float, float]
 # each time, constructing a new Color object will happen only once.
 #
 class MetaColors(abc.ABCMeta):
+    """
+    Not a "public" class, do we really need a docstring
+    """
     _white = None
     _black = None
     _blue = None
     _red = None
     _green = None
     _gray = None
-    _darkGray = None
-    _lightGray = None
+    _dark_gray = None
+    _light_gray = None
     _yellow = None
     _orange = None
     _pink = None
@@ -67,80 +73,91 @@ class MetaColors(abc.ABCMeta):
 
     @property
     def white(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._white is None:
             MetaColors._white = Color(255, 255, 255)
         return MetaColors._white
 
     @property
     def black(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._black is None:
             MetaColors._black = Color(0, 0, 0)
         return MetaColors._black
 
     @property
     def blue(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._blue is None:
             MetaColors._blue = Color(0, 0, 255)
         return MetaColors._blue
 
     @property
     def red(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._red is None:
             MetaColors._red = Color(255, 0, 0)
         return MetaColors._red
 
     @property
     def green(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._green is None:
             MetaColors._green = Color(0, 255, 0)
         return MetaColors._green
 
     @property
     def gray(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._gray is None:
             MetaColors._gray = Color(128, 128, 128)
         return MetaColors._gray
 
-    # noinspection PyPep8Naming
     @property
-    def darkGray(cls) -> 'Color':
-        if MetaColors._darkGray is None:
-            MetaColors._darkGray = Color(64, 64, 64)
-        return MetaColors._darkGray
+    def dark_gray(cls) -> 'Color':
+        """ lazy singleton """
+        if MetaColors._dark_gray is None:
+            MetaColors._dark_gray = Color(64, 64, 64)
+        return MetaColors._dark_gray
 
-    # noinspection PyPep8Naming
     @property
-    def lightGray(cls) -> 'Color':
-        if MetaColors._lightGray is None:
-            MetaColors._lightGray = Color(192, 192, 192)
-        return MetaColors._lightGray
+    def light_gray(cls) -> 'Color':
+        """ lazy singleton """
+        if MetaColors._light_gray is None:
+            MetaColors._light_gray = Color(192, 192, 192)
+        return MetaColors._light_gray
 
     @property
     def yellow(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._yellow is None:
             MetaColors._yellow = Color(255, 255, 0)
         return MetaColors._yellow
 
     @property
     def orange(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._orange is None:
             MetaColors._orange = Color(255, 200, 0)
         return MetaColors._orange
 
     @property
     def pink(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._pink is None:
             MetaColors._pink = Color(255, 175, 175)
         return MetaColors._pink
 
     @property
-    def magenta(self) -> 'Color':
+    def magenta(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._magenta is None:
             MetaColors._magenta = Color(255, 0, 255)
         return MetaColors._magenta
 
     @property
     def cyan(cls) -> 'Color':
+        """ lazy singleton """
         if MetaColors._cyan is None:
             MetaColors._cyan = Color(255, 0, 255)
         return MetaColors._cyan
@@ -152,8 +169,10 @@ class Colors(metaclass=MetaColors):
 
     Attributes
     ----------
-    white : Color  Lazily constructed singleton for object initialized with Color(255, 255, 255)
-    black : Color  Lazily constructed singleton for object initialized with Color(0, 0, 0)
+    white : Color
+        Lazily constructed singleton for object initialized with Color(255, 255, 255)
+    black : Color
+        Lazily constructed singleton for object initialized with Color(0, 0, 0)
     blue : Color
     red : Color
     green : Color
@@ -170,7 +189,11 @@ class Colors(metaclass=MetaColors):
 
 
 class BaseRGB:
+    """
+    class docstring goes here
 
+    This class is not intended for direct use by importers of this module
+    """
     def __init__(self, rgb: RGB):
         self.__rgb: RGB = rgb
 
@@ -179,7 +202,8 @@ class BaseRGB:
     @staticmethod
     def unpack(rgb: RGB) -> RGB:
         """
-        Converts sequence of at least 3 values to a tuple of ints
+        Converts sequence of at least 3 values to a tuple of 3 ints
+
         :param rgb: a sequence of 3 values convertible to `int`
         :type rgb: Tuple[int-like, int-like, int-like]
         :return: an actual `Tuple` of `int` values
@@ -187,50 +211,50 @@ class BaseRGB:
         return int(rgb[0]), int(rgb[1]), int(rgb[2])
 
     @staticmethod
+    def to_uint8(value: int) -> int:
+        """
+        clamps int-like value to a 0-255 int value
+
+        :param int value:
+        :return: value converted to 0-255 range by camping
+        :rtype int:
+        """
+        return min(255, max(0, int(value)))
+
+    @staticmethod
     def clamp(rgb: RGB) -> RGB:
         """
         Converts input tuple to a tuple of ints each in the range 0-255
-        :param rgb : red, green, blue triple with values that may or may not be outside the 0-255 range
+
+        :param rgb: red, green, blue triple with values that may or may
+                    not be outside the 0-255 range
 
         """
-        r = int(rgb[0])
-        if r < 0:
-            r = 0
-        elif r > 255:
-            r = 255
-
-        g = int(rgb[1])
-        if g < 0:
-            g = 0
-        elif g > 255:
-            g = 255
-
-        b = int(rgb[2])
-        if b < 0:
-            b = 0
-        elif b > 255:
-            b = 255
-
-        return r, g, b
+        return min(255, max(0, int(rgb[0]))),\
+            min(255, max(0, int(rgb[1]))),\
+            min(255, max(0, int(rgb[2])))
 
     @property
     def red(self) -> int:
         """
-        The 0-255 `int` value representing the red component of the underlying `Tuple`
+        The 0-255 `int` value representing the red component of the
+        underlying `Tuple`
         """
         return int(self.rgb[0])
 
     @property
     def green(self) -> int:
         """
-        The 0-255 `int` value representing the green component of the underlying `Tuple`
+        The 0-255 `int` value representing the green component of the
+        underlying `Tuple`
         """
         return int(self.rgb[1])
 
     @property
     def blue(self) -> int:
         """
-        The 0-255 `int` value representing the blue component of the underlying `Tuple`
+        The 0-255 :py:type:int value representing the blue component of the
+        underlying `Tuple`
         """
         return int(self.rgb[2])
 
@@ -250,55 +274,54 @@ class BaseRGB:
 
     def distance(self, color: 'BaseRGB') -> float:
         """
-        The Euclidian distance between this color and another color
+        The Cartesian distance between this color and another color
 
-        :param color : the other color
+        :param color: the other color
+        :type color: :py:class:`~.Color`
         """
 
         if not isinstance(color, BaseRGB):
-            # TODO: provide message
-            raise TypeError
+            message_prefix = "BaseRGB.distance(): "
+            message_middle = "expected color to be a BaseRGB object, actually "
+            raise TypeError(message_prefix + message_middle + f"{type(color)}")
         red_diff = float(self.red) - float(color.red)
         green_diff = float(self.green) - float(color.green)
         blue_diff = float(self.blue) - float(color.blue)
-        sum_squares = red_diff * red_diff + green_diff * green_diff + blue_diff * blue_diff
+        sum_squares = red_diff * red_diff + \
+            green_diff * green_diff + \
+            blue_diff * blue_diff
         return math.sqrt(sum_squares)
 
 
-# TODO: provide """ doc comments
 class Color(BaseRGB):
     """
-
+    Class docstring goes here.
     """
-    # TODO: provide """ doc comments
     @staticmethod
     def from_rgb(rgb: RGB) -> 'Color':
         """
+        Write better docstring
 
         :param rgb:
         :return:
+
         """
         return Color(rgb[0], rgb[1], rgb[2])
 
-    # TODO: provide """ doc comments
     @staticmethod
-    def from_rgb_float(rgb: RGB_float) -> 'Color':
+    def from_rgb_float(rgb: RGBfloat) -> 'Color':
         """
+        Write better docstring
 
         :param rgb:
         :return:
         """
-        return Color(int(rgb[0] * 255 + 0.5), int(rgb[1] * 255 + 0.5), int(rgb[2] * 255 + 0.5))
+        return Color(int(rgb[0] * 255 + 0.5),
+                     int(rgb[1] * 255 + 0.5),
+                     int(rgb[2] * 255 + 0.5))
 
-    # TODO: provide """ doc comments
-    def __init__(self, r: int = 0, g: int = 0, b: int = 0, *, rgb: typing.Optional[RGB] = None):
-        """
-
-        :param r:
-        :param g:
-        :param b:
-        :param rgb:
-        """
+    def __init__(self, r: int = 0, g: int = 0, b: int = 0, *,
+                 rgb: typing.Optional[RGB] = None):
         if rgb is not None:
             super().__init__(rgb)
         else:
@@ -311,43 +334,66 @@ class Color(BaseRGB):
         return self.__repr__()
 
     def _repr_html_(self) -> str:
-        html_color: str = "#{0:02x}{1:02x}{2:02x}".format(self.red, self.green, self.blue)
-        text: str = "r:{0:3d}, g:{1:3d}, b:{2:3d}".format(self.red, self.green, self.blue)
-        result: str = "<table style='border:0px'><tr><td style='padding:0px;margin:0px;background:" + \
-                      html_color + \
-                      ";height:64px;'>&nbsp;</td></tr><tr><td><pre>" + text + "</pre></td></tr></table>"
+        html_color: str = "#{0:02x}{1:02x}{2:02x}".format(self.red,
+                                                          self.green,
+                                                          self.blue)
+        text: str = "r:{0:3d}, g:{1:3d}, b:{2:3d}".format(self.red,
+                                                          self.green,
+                                                          self.blue)
+        table_start: str = "<table style='border:0px'><tr>"
+        cell_start: str = "<td style='padding:0px;margin:0px;background:"
+        middle: str = ";height:64px;'>&nbsp;</td></tr><tr><td><pre>"
+        end: str = "</pre></td></tr></table>"
+        result: str = table_start + cell_start + html_color + middle + text + end
         return result
 
-    def rgb_float(self) -> RGB_float:
+    def rgb_float(self) -> RGBfloat:
         """
-        Converts internal `int`-based tuple on a scale of 0-255 into a `float`-based tuple on a scale of 0.0 - 1.0
+        Converts internal `int`-based tuple on a scale of 0-255 into a
+        `float`-based tuple on a scale of 0.0 - 1.0
+
+        :rtype: RGB_float
         """
         return self.__rgb[0]/255.0, self.__rgb[1]/255.0, self.__rgb[2]/255.0
 
     def hsv(self) -> HSV:
         """
-        :return a  Hue, Saturation, Value :py:class`tuple` from :py:func:`colorsys.rgb_to_hsv`
+        Converts from RGB to HSV
+
+        :return: a  Hue, Saturation, Value tuple from
+                :py:func:`colorsys.rgb_to_hsv`
+        :rtype: HSV
         """
-        (r, g, b) = self.rgb_float()
-        return colorsys.rgb_to_hsv(r, g, b)
+        rgb: RGBfloat = self.rgb_float()
+        return colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
 
     def hls(self) -> HLS:
         """
-        :return a  Hue, Lightness, Saturation `Tuple` from :py:func:`colorsys.rgb_to_hls`
+        Converts from RGB to HLS
+
+        :return: a  Hue, Lightness, Saturation tuple from
+                :py:func:`colorsys.rgb_to_hls`
+        :rtype: HLS
         """
-        (r, g, b) = self.rgb_float()
-        return colorsys.rgb_to_hls(r, g, b)
+        rgb: RGBfloat = self.rgb_float()
+        return colorsys.rgb_to_hls(rgb[0], rgb[1], rgb[2])
 
     def darker(self) -> 'Color':
         """
-        :return a :py:func:`~Color` with its components scaled by multiplying them by 0.7
+
+        :return: a :py:func:`~Color` with its components scaled by
+                multiplying them by 0.7
+        :rtype: Color
         """
         rgb: RGB = self.rgb
-        return Color(int(rgb[0] * 0.7), int(rgb[1] * 0.7), int(rgb[1] * 0.7))
+        return Color(rgb[0] * 0.7, rgb[1] * 0.7, rgb[1] * 0.7)
 
     def lighter(self) -> 'Color':
         """
-        :return a color with its components scaled by multiplying them by 1.0/0.7
+
+        :return: a color with its components scaled by multiplying
+                them by 1.0/0.7
+        :rtype: Color
         """
         rgb: RGB = self.rgb
-        return Color(int(rgb[0] / 0.7), int(rgb[1] / 0.7), int(rgb[1] / 0.7))
+        return Color(rgb[0] / 0.7, rgb[1] / 0.7, rgb[1] / 0.7)

@@ -10,6 +10,8 @@ Package `MediaComp`
    files.rst
    sounds.rst
    turtles.rst
+   
+   .. todolist::
 
 Indices and tables
 ==================

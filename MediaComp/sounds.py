@@ -8,6 +8,9 @@
 # licensed under the Creative Commons Attribution 3.0 United States License,
 # See: http://creativecommons.org/licenses/by/3.0/us/).
 
+"""
+Module-level docstring goes here!
+"""
 
 # module typing is standard in Python 3.5+: https://docs.python.org/3/library/typing.html
 # used for type hints used in static type checking in PEP 484
@@ -15,19 +18,22 @@
 # PEP 525 -- Syntax for Variable Annotations: https://www.python.org/dev/peps/pep-0526/
 # use mypy for static type checking of Pyhton code: http://mypy-lang.org/
 # note that just because a parameter is annotated to be of a specific type, doesn't mean
-# that at runtime it will actually be of that type: dynamic checking or casting/conversion still needs to be done
+# that at runtime it will actually be of that type: dynamic checking or casting/conversion
+# still needs to be done
 import typing
 
 import os
 
-# suppress static type checker complain "error: No library stub file for module 'numpy'"
+import collections.abc
+
+# suppress mypy "error: No library stub file for module 'numpy'"
 import numpy  # type: ignore
 
 
 # using read & write methods of wavfile class in scipy.io module
-# See: https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.read.html#scipy.io.wavfile.read
+# See: https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.read.html
 
-# suppress static type checker complain "error: No library stub file for module 'scipy.io'"
+# suppress mypy "error: No library stub file for module 'scipy.io'"
 from scipy.io import wavfile  # type: ignore
 
 # The IPython.core.display module is specific to IPython which is used in Jupyter
@@ -37,31 +43,32 @@ import IPython  # type: ignore
 from . import files
 
 
-class Sound(typing.Iterable):
+class Sound(collections.abc.Iterable):
     """
     represents a sound read in from a WAV format file
     """
 
-    # TODO: edit docstring
     @classmethod
     def from_file(cls, file_name: typing.Union[str, os.PathLike]) -> 'Sound':
         """
+        Write better docstring
 
         :param file_name:
         :return:
         """
-        path = files.media_path(file_name)
+        path = files.media_path(str(file_name))
         rate, data = wavfile.read(path)
         return cls(numpy.copy(data), rate)
 
-    # TODO: edit docstring
     @classmethod
-    def make_empty(cls, num_samples: int, rate: float = 22500.0):
+    def make_empty(cls, num_samples: int, rate: float = 22500.0) -> 'Sound':
         """
+        Write beter docstring
 
-        :param num_samples:
-        :param rate:
+        :param int num_samples:
+        :param float rate:
         :return:
+        :rtype: Sound
         """
         num_samples = int(num_samples)
         if num_samples < 0:
@@ -74,6 +81,12 @@ class Sound(typing.Iterable):
         self.__samples: numpy.array = data
 
     def copy(self) -> 'Sound':
+        """
+        write better docstring
+
+        :return: a copy of this Sound
+        :rtype: Sound
+        """
         data_copy: numpy.array = numpy.copy(self.__samples)
         new_sound: 'Sound' = Sound(data_copy, self.__rate)
         return new_sound
@@ -85,10 +98,10 @@ class Sound(typing.Iterable):
         for i in range(0, self.length):
             yield Sample(i, self)
 
-    # TODO: property docstring
     @property
     def samples(self) -> typing.Iterator['Sample']:
         """
+        Write better docstring
 
         """
         return iter(self)
@@ -97,6 +110,8 @@ class Sound(typing.Iterable):
     def length(self) -> int:
         """
         number of samples in the sound
+
+        :type: int
         """
         return len(self.__samples)
 
@@ -115,13 +130,7 @@ class Sound(typing.Iterable):
         """ returns sampling rate of sound in samples per second (Hz) """
         return self.__rate
 
-    # TODO method docstring
     def __getitem__(self, index: int) -> int:
-        """
-
-        :param index:
-        :return:
-        """
         index = int(index)
         if index < 0:
             raise IndexError(f'Sound.getitem({index}): Negative Index')
@@ -160,31 +169,25 @@ class Sound(typing.Iterable):
         self.__samples[index] = value
 
     def _repr_html_(self) -> str:
-        """
-
-        :return:
-        """
         audio = IPython.display.Audio(self.__samples, rate=int(self.__rate))
         # noinspection PyProtectedMember
-        return audio._repr_html_()
+        return audio._repr_html_()  # pylint: disable=protected-access
 
-    # TODO method docstring
     def write(self, file_name: str) -> None:
         """
+        Write better docstring
 
         :param file_name:
         :return:
         """
-        from . import files
         file_name = str(file_name)
         file_path = files.media_path(file_name)
         wavfile.write(str(file_path), int(self.rate), self.__samples)
 
 
-# TODO: class docstring
 class Sample:
     """
-
+    Class level docstring
     """
     def __init__(self, index, sound: Sound):
         index = int(index)
@@ -195,18 +198,24 @@ class Sample:
         self.__sound: Sound = sound
         self.__index: int = index
 
-    # TODO: edit property docstring
     @property
     def value(self) -> int:
-        """  ??? """
+        """
+        Write better docstring
+
+        :type: int
+        """
         return int(self.__sound[self.__index])
 
     @value.setter
-    def value(self, v: int) -> None:
-        self.__sound[self.__index] = numpy.int16(Sound.clamp(v))
+    def value(self, val: int) -> None:
+        self.__sound[self.__index] = numpy.int16(Sound.clamp(val))
 
-    # TODO: edit property docstring
     @property
     def sound(self) -> Sound:
-        """ ??? """
+        """
+        Write better docstring
+
+        :type: Sound
+        """
         return self.__sound

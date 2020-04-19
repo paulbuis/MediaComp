@@ -1,18 +1,19 @@
-.. py:module:: MediaComp.turtles
-.. py:currentmodule:: MediaComp.turtles
+.. currentmodule:: MediaComp.turtles
 
 :py:mod:`~turtles` Module
 ==========================
-.. automodule:: MediaComp.turtles
+.. autosummary::
+
+   MediaComp.turtles.World
+      MediaComp.turtles.World.new_turtle
+   MediaCOmp.turtles.Turtle
 
 :py:class:`~World` class
 ------------------------
 .. autoclass:: MediaComp.turtles.World
       :members:
-      :inherited-members:
 
 :py:class:`~Turtle` class
 -------------------------
 .. autoclass:: MediaComp.turtles.Turtle
       :members:
-      :inherited-members:
